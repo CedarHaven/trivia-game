@@ -35,3 +35,5 @@ var qAndA = [
     answer3: "Casey Lee Williams",
     answer4: "Sandra Lee Casey"}
 ]
+
+//idea: change this to 'rightAnswer' and then three wrongAnswer tags, select question randomly, display answers randomly, and check if the text of the thing the person clicks on is the same as the rightAnswer text and if yes, then they win.
