@@ -36,4 +36,123 @@ var qAndA = [
     answer4: "Sandra Lee Casey"}
 ]
 
-//idea: change this to 'rightAnswer' and then three wrongAnswer tags, select question randomly, display answers randomly, and check if the text of the thing the person clicks on is the same as the rightAnswer text and if yes, then they win.
+// all of this is working as intended now.
+// things to do:
+// make it so that once you've gone through all the questions and your score is displayed, a 'play again' button comes up that starts the game over
+// change the console.log stuff to being in the appropriate divs and clear the relevant divs when answers and such are given
+// css
+
+var time = 30;
+var interval;
+var i = 0;
+var rightAns = ["Monty Oum", "Yang Xiao Long, Blake Belladonna, Ruby Rose, and Weiss Schnee", "4", "Salem", "Crescent Rose", "Casey Lee Williams"];
+var timeUp = false;
+var ansGiven = false;
+var correct = 0;
+var wrong = 0;
+var timeOut = 0;
+
+$("#start").click(getQuestion);
+
+$("#answers").on("click", function(e) {
+    var text = $(e.target).text();
+
+    if(!timeUp && !ansGiven){
+        if(rightAns.includes(text)) {
+            correct++;
+            console.log("correct");
+            ansGiven = true;
+            clearInterval(interval);
+            i++;
+            if(i < qAndA.length) {
+                setTimeout(getQuestion, 2000);
+            }
+            else {
+                console.log("game over");
+                console.log("correct answers: "+correct);
+                console.log("wrong answers: "+wrong);
+                console.log("unanswered: "+timeOut);
+            }
+        }
+        else {
+            wrong++;
+            console.log("nope!");
+            console.log("the correct answer was "+rightAns[i]);
+            ansGiven = true;
+            clearInterval(interval);
+            i++;
+            if(i < qAndA.length) {
+                setTimeout(getQuestion, 2000);
+            }
+            else {
+                console.log("game over");
+                console.log("correct answers: "+correct);
+                console.log("wrong answers: "+wrong);
+                console.log("unanswered: "+timeOut);
+            }
+        }
+    }
+});
+
+
+// function startGame() {
+//     getQuestion();
+// }
+
+function getQuestion() {
+    time = 30;
+    ansGiven = false;
+    timeUp = false;
+    $("#time").html("00:30");
+    interval = setInterval(count, 1000);
+    $("#start-button").empty();
+    $("#question").html(qAndA[i].question);
+
+    $("#ans-1").html(qAndA[i].answer1);
+    $("#ans-2").html(qAndA[i].answer2);
+    $("#ans-3").html(qAndA[i].answer3);
+    $("#ans-4").html(qAndA[i].answer4);
+}
+
+function count() {
+    time--;
+    var countdown = timeConverter(time);
+    $("#time").html(countdown);
+
+    if(time === 0){
+        timeOut++;
+        timeUp = true;
+        console.log("you ran out of time!");
+        console.log("the correct answer was "+rightAns[i]);
+        i++;
+        clearInterval(interval);
+        if(i < qAndA.length) {
+            setTimeout(getQuestion, 2000);
+        }
+        else {
+            console.log("game over");
+            console.log("correct answers: "+correct);
+            console.log("wrong answers: "+wrong);
+            console.log("unanswered: "+timeOut);
+        }
+    }
+}
+
+function timeConverter(t) {
+    //  Takes the current time in seconds and convert it to minutes and seconds (mm:ss).
+    var minutes = Math.floor(t / 60);
+    var seconds = t - (minutes * 60);
+  
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+  
+    if (minutes === 0) {
+      minutes = "00";
+    }
+    else if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    return minutes + ":" + seconds;
+}
