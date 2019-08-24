@@ -84,6 +84,7 @@ $("#answers").on("click", function(e) {
         i++;
 
         if(i < qAndA.length) {
+            // the timeout might be a little long, but...whatever.
             setTimeout(getQuestion, 2000);
         }
         else {
