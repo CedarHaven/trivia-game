@@ -1,0 +1,8 @@
+div{
+    font-size: 18px;
+}
+
+.div-hover:hover{
+    width: 30%;
+    border: solid 2px purple;
+}
