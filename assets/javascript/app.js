@@ -1,3 +1,4 @@
+// question and answer object, has all the questions and the associated answers.
 var qAndA = [
     {question: "Who created RWBY?",
     answer1: "Monty Oum",
@@ -36,78 +37,105 @@ var qAndA = [
     answer4: "Sandra Lee Casey"}
 ]
 
-// all of this is working as intended now.
-// things to do:
-// make it so that once you've gone through all the questions and your score is displayed, a 'play again' button comes up that starts the game over
-// change the console.log stuff to being in the appropriate divs and clear the relevant divs when answers and such are given
-// css
-
+// I have a time variable (30 seconds)
+// an interval variable (for the timing stuff)
+// i (for cycling through my arrays)
+// an array of right answers in order of the questions, for checking if you got it right or not (which works because the question order isn't randomized)
+// and counters for your wrong answers, right answers, and the questions you didn't answer at all.
+// there's also the reset button, for if you want to replay.
 var time = 30;
 var interval;
 var i = 0;
 var rightAns = ["Monty Oum", "Yang Xiao Long, Blake Belladonna, Ruby Rose, and Weiss Schnee", "4", "Salem", "Crescent Rose", "Casey Lee Williams"];
-var timeUp = false;
-var ansGiven = false;
 var correct = 0;
 var wrong = 0;
 var timeOut = 0;
+var resetButton = $("<button/>", {
+    text: "Reset",
+    id: "reset-button",
+    click:function() {
+        $("#reset").empty();
+        $("#correct-answer").empty();
+        correct = 0;
+        wrong = 0;
+        timeOut = 0;
+        i = 0;
+        time = 30;
+        getQuestion();
+    }
+});
 
-$("#start").click(getQuestion);
+$("#start").click(startGame);
 
 $("#answers").on("click", function(e) {
     var text = $(e.target).text();
 
-    if(!timeUp && !ansGiven){
-        if(rightAns.includes(text)) {
-            correct++;
-            console.log("correct");
-            ansGiven = true;
-            clearInterval(interval);
-            i++;
-            if(i < qAndA.length) {
-                setTimeout(getQuestion, 2000);
-            }
-            else {
-                console.log("game over");
-                console.log("correct answers: "+correct);
-                console.log("wrong answers: "+wrong);
-                console.log("unanswered: "+timeOut);
-            }
+    if(rightAns.includes(text)) {
+        correct++;
+        clearInterval(interval);
+
+        $("#ans-1").empty();
+        $("#ans-2").empty();
+        $("#ans-3").empty();
+        $("#ans-4").empty();
+        $("#question").empty();
+        $("#correct-answer").text("You got it right!");
+
+        i++;
+
+        if(i < qAndA.length) {
+            setTimeout(getQuestion, 2000);
         }
         else {
-            wrong++;
-            console.log("nope!");
-            console.log("the correct answer was "+rightAns[i]);
-            ansGiven = true;
-            clearInterval(interval);
-            i++;
-            if(i < qAndA.length) {
-                setTimeout(getQuestion, 2000);
-            }
-            else {
-                console.log("game over");
-                console.log("correct answers: "+correct);
-                console.log("wrong answers: "+wrong);
-                console.log("unanswered: "+timeOut);
-            }
+            $("#ans-1").empty();
+            $("#ans-2").empty();
+            $("#ans-3").empty();
+            $("#ans-4").empty();
+            $("#question").empty();
+            $("#reset").append(resetButton);
+            $("#correct-answer").html("Game Over.<br>Correct Answers: "+correct+"<br>Wrong Answers: "+wrong+"<br> Unanswered: "+timeOut+"<br>If you'd like to play again, hit the reset button.");
+        }
+    }
+    else {
+        wrong++;
+        clearInterval(interval);
+
+        $("#ans-1").empty();
+        $("#ans-2").empty();
+        $("#ans-3").empty();
+        $("#ans-4").empty();
+        $("#question").empty();
+        $("#correct-answer").text("Sorry, you got it wrong! The correct answer was "+rightAns[i]+".");
+
+        i++;
+
+        if(i < qAndA.length) {
+            setTimeout(getQuestion, 2000);
+        }
+        else {
+            $("#ans-1").empty();
+            $("#ans-2").empty();
+            $("#ans-3").empty();
+            $("#ans-4").empty();
+            $("#question").empty();
+            $("#reset").append(resetButton);
+            $("#correct-answer").html("Game Over.<br>Correct Answers: "+correct+"<br>Wrong Answers: "+wrong+"<br> Unanswered: "+timeOut+"<br>If you'd like to play again, hit the reset button.");
         }
     }
 });
 
-
-// function startGame() {
-//     getQuestion();
-// }
+// this function exists primarily so that the getQuestion function isn't clearing the start-button div every time it's called, since most of the time, that div would already be empty.
+function startGame() {
+    $("#start-button").empty();
+    getQuestion();
+}
 
 function getQuestion() {
     time = 30;
-    ansGiven = false;
-    timeUp = false;
     $("#time").html("00:30");
     interval = setInterval(count, 1000);
-    $("#start-button").empty();
+    $("#correct-answer").empty();
     $("#question").html(qAndA[i].question);
-
     $("#ans-1").html(qAndA[i].answer1);
     $("#ans-2").html(qAndA[i].answer2);
     $("#ans-3").html(qAndA[i].answer3);
@@ -121,38 +149,47 @@ function count() {
 
     if(time === 0){
         timeOut++;
-        timeUp = true;
-        console.log("you ran out of time!");
-        console.log("the correct answer was "+rightAns[i]);
-        i++;
         clearInterval(interval);
+
+        $("#ans-1").empty();
+        $("#ans-2").empty();
+        $("#ans-3").empty();
+        $("#ans-4").empty();
+        $("#question").empty();
+        $("#correct-answer").text("You ran out of time. The correct answer was "+rightAns[i]+".");
+
+        i++;
+
         if(i < qAndA.length) {
             setTimeout(getQuestion, 2000);
         }
         else {
-            console.log("game over");
-            console.log("correct answers: "+correct);
-            console.log("wrong answers: "+wrong);
-            console.log("unanswered: "+timeOut);
+            $("#ans-1").empty();
+            $("#ans-2").empty();
+            $("#ans-3").empty();
+            $("#ans-4").empty();
+            $("#question").empty();
+            $("#reset").append(resetButton);
+            $("#correct-answer").html("Game Over.<br>Correct Answers: "+correct+"<br>Wrong Answers: "+wrong+"<br> Unanswered: "+timeOut+"<br>If you'd like to play again, hit the reset button.");
         }
     }
 }
 
-function timeConverter(t) {
-    //  Takes the current time in seconds and convert it to minutes and seconds (mm:ss).
-    var minutes = Math.floor(t / 60);
-    var seconds = t - (minutes * 60);
+// yes, I took this right out of the stopwatch. I don't care. I wanted this to look nice, and this function was right there, so I looked at it and copied it. the only thing I changed is variables, to make more sense to me/make them easier to type.
+function timeConverter(time) {
+    var mins = Math.floor(time/60);
+    var secs = time - (mins*60);
   
-    if (seconds < 10) {
-      seconds = "0" + seconds;
+    if (secs < 10) {
+      secs = "0"+secs;
     }
   
-    if (minutes === 0) {
-      minutes = "00";
+    if (mins === 0) {
+      mins = "00";
     }
-    else if (minutes < 10) {
-      minutes = "0" + minutes;
+    else if (mins < 10) {
+      mins = "0"+mins;
     }
 
-    return minutes + ":" + seconds;
+    return mins+":"+secs;
 }
