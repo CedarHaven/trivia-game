@@ -157,7 +157,7 @@ function count() {
         $("#ans-3").empty();
         $("#ans-4").empty();
         $("#question").empty();
-        $("#correct-answer").text("You ran out of time. The correct answer was "+rightAns[i]+".");
+        $("#correct-answer").text("You ran out of time. The answer was "+rightAns[i]+".");
 
         i++;
 
