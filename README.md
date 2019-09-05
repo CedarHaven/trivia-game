@@ -4,7 +4,7 @@ This is a RWBY-based trivia game with six questions. It has a thirty-second time
 ## Installation
 
 You can use Git Bash to clone the repository onto your computer by entering the following in Git Bash:
-```git clone https://github.com/CedarHaven/trivia-game.git```
+```git clone https://github.com/juniperhaven/trivia-game.git```
 After doing so, open the folder you've downloaded, right click 'index.html' and open in your browser of choice.
 
-Alternately, the project is hosted on Git Pages at https://cedarhaven.github.io/trivia-game/
+Alternately, the project is hosted on Git Pages at https://juniperhaven.github.io/trivia-game/
