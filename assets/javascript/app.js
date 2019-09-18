@@ -22,7 +22,7 @@ var qAndA = [
 
     {question: "Who is the primary vocalist for RWBY?",
     answers: ["Jeff Williams", "Lamar Hall", "Casey Lee Williams", "Sandra Lee Casey"],
-    correctAns: "Casey Lee WIlliams"}
+    correctAns: "Casey Lee Williams"}
 ]
 
 // I have a time variable (30 seconds)
@@ -58,6 +58,8 @@ $("#answers").on("click", function(e) {
 
     if(text == qAndA[i].correctAns) {
         correct++;
+        console.log(correct);
+        console.log(wrong);
         clearInterval(interval);
 
         $("#answers").empty();

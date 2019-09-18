@@ -1,8 +1,89 @@
-div{
+html, body{
+    background: rgb(62, 77, 82);
+}
+
+#trivia{
+    height: 650px;
+    width: 50%;
+    background: gray;
+    text-align: center;
+    margin-left: 25%;
+    margin-top: 30px;
+    border: 2px solid black;
+}
+
+#title{
+    font-family: Arial;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#start{
+    padding: 5px 5px 5px 5px;
+    font-size: 20px;
+    margin-top: 25px;
+    background: rgb(85, 1, 1);
+    color: white;
+    border: none;
+}
+
+#start:hover{
+    background: rgb(129, 26, 161);
+    color: black;
+}
+
+#time{
     font-size: 18px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 10px;
+}
+
+#correct-answer{
+    font-family: Arial;
+    font-size: 20px;
+}
+
+#question{
+    font-size: 20px;
+    font-family: Arial;
+    margin-bottom: 8px;
+}
+
+#answers{
+    font-size: 16px;
+    font-family: Arial;
+    text-align: center;
+    width: 90%;
+}
+
+.div-hover{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 45px;
+    padding: 5px 5px 5px 5px;
 }
 
 .div-hover:hover{
-    width: 30%;
+    width: 90%;
+    text-align: center;
     border: solid 2px purple;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 39px;
+    padding: 5px 5px 5px 5px;
+}
+
+#reset-button{
+    padding: 5px 5px 5px 5px;
+    font-size: 20px;
+    margin-top: 25px;
+    background: rgb(129, 26, 161);
+    color: black;
+    border: none;
+}
+
+#reset-button:hover{
+    background: rgb(85, 1, 1);
+    color: white;
 }
