@@ -11,21 +11,25 @@
         <div id="trivia">
             <div id="title">RWBY Trivia</div>
 
+            <!-- time countdown displays here -->
             <div id="time"></div>
 
+            <!-- current question displays here -->
             <div id="question"></div>
 
+            <!-- once you've picked an answer, the text telling you if you got it right (and if not, what the right answer was) goes here. -->
             <div id="correct-answer"></div>
 
+            <!-- the gif that accompanies the text telling you if you got the answer right or not goes here. it starts with an image in it because I thought that would be fun. -->
+            <div id="answer-img"><img src="assets/images/opening.jpg"></div>
+
+            <!-- start button -->
             <div id="start-button"><button type="button" id="start">Start</button></div>
 
-            <!-- this div is here so that the javascript click has a whole div to target instead of several smaller ones, but I needed the several smaller divs for the html and answer displaying and stuff. -->
-            <div id="answers">
-            </div>
+            <!-- this div is here so that the javascript click has a whole div to target, and then the smaller divs that are targeted for the hover are added dynamically with javascript. -->
+            <div id="answers"></div>
 
-            <!-- this is here because the demo had like...images that accompanied "you got it right" or "you got it wrong, the answer was (x)", and I was going to do that. but then I didn't. because my hand hurts a hell of a lot and I'm tired. but I'm not taking this out, because I might come back and add images at a later date. -->
-            <div id="answer-image"></div>
-
+            <!-- the div for the reset button. -->
             <div id="reset"></div>
         </div>
 
