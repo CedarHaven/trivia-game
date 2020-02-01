@@ -44,17 +44,7 @@ var wrong = 0;
 var timeOut = 0;
 var resetButton = $("<button/>", {
     text: "Reset",
-    id: "reset-button",
-    click:function() {
-        $("#reset").empty();
-        $("#correct-answer").empty();
-        correct = 0;
-        wrong = 0;
-        timeOut = 0;
-        i = 0;
-        time = 30;
-        getQuestion();
-    }
+    id: "reset-button"
 });
 
 $("#start").click(startGame);
@@ -165,6 +155,16 @@ function gameOver() {
     $("#question").empty();
     $("#answer-img").empty();
     $("#reset").append(resetButton);
+    $("#reset-button").on("click", function() {
+        $("#reset").empty();
+        $("#correct-answer").empty();
+        correct = 0;
+        wrong = 0;
+        timeOut = 0;
+        i = 0;
+        time = 30;
+        getQuestion();
+    });
     $("#correct-answer").html("Game Over.<br>Correct Answers: "+correct+"<br>Wrong Answers: "+wrong+"<br> Unanswered: "+timeOut+"<br>If you'd like to play again, hit the reset button.");
 }
 
